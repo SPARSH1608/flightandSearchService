@@ -8,6 +8,7 @@
         services/
         utils/
         config/
+        repository/
 
     -tests/[later]
     -static/
