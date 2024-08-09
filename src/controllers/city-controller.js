@@ -56,7 +56,7 @@ const get = async (req, res) => {
     return res.status(500).json({
       data: {},
       success: false,
-      message: 'Not able to get city',
+      message: 'Not able to get the city',
       err: error,
     });
   }
@@ -64,7 +64,7 @@ const get = async (req, res) => {
 //patch-> /city:id->req.body
 const update = async (req, res) => {
   try {
-    const response = await cityService.updateCity(req.params.id);
+    const response = await cityService.updateCity(req.params.id, req.body);
     return res.status(200).json({
       data: response,
       success: true,

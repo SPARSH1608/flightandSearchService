@@ -14,11 +14,11 @@ class CityRepository {
     }
   }
 
-  async deleteCity({ cityId }) {
+  async deleteCity(id) {
     try {
       await City.destroy({
         where: {
-          id: cityId,
+          id,
         },
       });
       return true;
@@ -28,13 +28,19 @@ class CityRepository {
       throw { error };
     }
   }
-  async updateCity({ cityId, data }) {
+  async updateCity(cityId, data) {
     try {
-      const city = await City.update(data, {
-        where: {
-          id: cityId,
-        },
-      });
+      //the below apporach also works but will not return updated object
+      ///if we using PG then returning true can be used else not
+      // const city = await City.update(data, {
+      //   where: {
+      //     id: cityId,
+      //   },
+      // });
+      //for getting updated data in mysql we use the below approach
+      const city = await City.findByPk(cityId);
+      city.name = data.name;
+      await city.save();
       return city;
     } catch (error) {
       console.log('something went wrong');
@@ -42,19 +48,12 @@ class CityRepository {
       throw { error };
     }
   }
-
-  async getCity({ cityId }) {
+  async getCity(cityId) {
     try {
-      //   const city = await City.findByPk(cityId);
-      const city = await City.findOne({
-        where: {
-          id: cityId,
-        },
-      });
+      const city = await City.findByPk(cityId);
       return city;
     } catch (error) {
-      console.log('something went wrong');
-
+      console.log('Something went wrong in the repository layer');
       throw { error };
     }
   }
