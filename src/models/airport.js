@@ -10,7 +10,7 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       this.belongsTo(models.City, {
-        foreignKey: 'city_Id',
+        foreignKey: 'cityId',
         onDelete: 'CASCADE',
       });
     }
@@ -22,7 +22,10 @@ module.exports = (sequelize, DataTypes) => {
         allowNull: false,
       },
       address: DataTypes.STRING,
-      city_Id: { type: DataTypes.INTEGER, allowNull: false },
+      cityId: {
+        type: DataTypes.INTEGER,
+        allowNull: false,
+      },
     },
     {
       sequelize,
