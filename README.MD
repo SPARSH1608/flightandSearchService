@@ -72,3 +72,7 @@
     Relationship-> city has many airports and Airport belongs to a city(one to many)
     city doesnt store any info about airport but every airport has a col of city_id so that when we want to have all airports of a city
     we does a where query and filter out
+
+# how to create seed files
+
+    npx sequelize seed:generate --name add-airplanes
