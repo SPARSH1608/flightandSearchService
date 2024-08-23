@@ -76,3 +76,7 @@
 # how to create seed files
 
     npx sequelize seed:generate --name add-airplanes
+
+# Creating flights model
+
+    npx sequelize model:generate --name Flights --attributes flightNumber:String,airplaneId:integer,departureAirportId:intger,arrivalAirportId:integer,arrivalTime:DateTime,departureTime:DateTime,price:integer,boardingGate:String,duration:integer,totalSeats:integer
