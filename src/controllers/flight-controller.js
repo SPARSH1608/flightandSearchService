@@ -1,5 +1,5 @@
 const { FlightService } = require('../services/index');
-
+const { SuccessCodes, ServerErrors } = require('../utils/error-codes');
 const flightService = new FlightService();
 
 const create = async (req, res) => {
@@ -14,7 +14,7 @@ const create = async (req, res) => {
       price: req.body.price,
     };
     const flight = await flightService.createFlight(flightRequestData);
-    res.status(201).json({
+    res.status(SuccessCodes.CREATED).json({
       data: flight,
       success: true,
       err: {},
@@ -34,7 +34,7 @@ const create = async (req, res) => {
 const getAll = async (req, res) => {
   try {
     const response = await flightService.getAllFlightData(req.query);
-    res.status(201).json({
+    res.status(SuccessCodes.OK).json({
       data: response,
       success: true,
       err: {},
@@ -51,7 +51,48 @@ const getAll = async (req, res) => {
   }
 };
 
+const get = async (req, res) => {
+  try {
+    console.log(req.params.id);
+    const response = await flightService.getFlight(req.params.id);
+    res.status(200).json({
+      data: response,
+      success: true,
+      err: {},
+      message: 'Successfully fetched the flight',
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      data: {},
+      success: false,
+      message: 'Not able to fetch the flight',
+      err: error,
+    });
+  }
+};
+const update = async (req, res) => {
+  try {
+    const response = await flightService.updateFlight(req.params.id, req.body);
+    res.status(200).json({
+      data: response,
+      success: true,
+      err: {},
+      message: 'Successfully updated the flight',
+    });
+  } catch (error) {
+    console.log(error);
+    return res.status(500).json({
+      data: {},
+      success: false,
+      message: 'Not able to update the flight',
+      err: error,
+    });
+  }
+};
 module.exports = {
   create,
   getAll,
+  get,
+  update,
 };
