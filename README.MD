@@ -1,5 +1,8 @@
 # Welcome to Flights Services
 
+## Introduction
+
+The Flight Search Service is responsible for managing the flight data, cities, and airports. It allows users to search for flights, manage city and airport information, and apply various filters to find the best flights.
 ## Project Setup
 
     -clone the project on your local
@@ -80,3 +83,34 @@
 # Creating flights model
 
     npx sequelize model:generate --name Flights --attributes flightNumber:String,airplaneId:integer,departureAirportId:intger,arrivalAirportId:integer,arrivalTime:DateTime,departureTime:DateTime,price:integer,boardingGate:String,duration:integer,totalSeats:integer
+
+
+
+
+# Routes
+## City Routes:
+
+GET /city: Get all cities.
+
+POST /city: Create a new city.
+
+DELETE /city/:id: Delete a city by ID.
+
+GET /city/:id: Get a city by ID.
+
+PATCH /city/:id: Update a city by ID.
+
+## Flight Routes:
+
+POST /flights: Create a new flight.
+GET /flights: Get all flights with filters.
+GET /flights/:id: Get a flight by ID.
+PATCH /flights/:id: Update a flight by ID.
+Airport Routes:
+
+POST /airports: Create a new airport.
+
+# Validation
+FlightMiddleware.validateCreateFlight ensures the integrity of flight data during creation.
+# Notes
+Pagination and Filtering are supported in the flight search API.
